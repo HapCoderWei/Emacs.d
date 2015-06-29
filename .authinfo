@@ -1,0 +1,2 @@
+machine imap.gmail.com login taihengw@gmail.com password wei123WEI port 993
+machine smtp.gmail.com login taihengw@gmail.com password wei123WEI port 587

@@ -1,2 +1,4 @@
 # Emacs.d
-my emacs config folder. forked from bin chen.
+My emacs config folder. Forked from bin chen's config.
+
+Just backup for myself. And welcome to fork :)
