@@ -5,7 +5,7 @@
 ;;----------------------------------------------------------------------------
 ;; Which functionality to enable (use t or nil for true and false)
 ;;----------------------------------------------------------------------------
-(setq *macbook-pro-support-enabled* t)
+(setq *macbook-pro-support-enabled* nil)
 (setq *is-a-mac* (eq system-type 'darwin))
 (setq *is-carbon-emacs* (and *is-a-mac* (eq window-system 'mac)))
 (setq *is-cocoa-emacs* (and *is-a-mac* (eq window-system 'ns)))
@@ -45,17 +45,17 @@
 (require 'init-utils)
 (require 'init-site-lisp) ;; Must come before elpa, as it may provide package.el
 
-;; win32 auto configuration, assuming that cygwin is installed at "c:/cygwin"
-(condition-case nil
-    (when *win32*
-      (setq cygwin-mount-cygwin-bin-directory "c:/cygwin/bin")
-      (require 'setup-cygwin)
-      ;; better to set HOME env in GUI
-      ;; (setenv "HOME" "c:/cygwin/home/someuser")
-      )
-  (error
-   (message "setup-cygwin failed, continue anyway")
-   ))
+;; ;; win32 auto configuration, assuming that cygwin is installed at "c:/cygwin"
+;; (condition-case nil
+;;     (when *win32*
+;;       (setq cygwin-mount-cygwin-bin-directory "c:/cygwin/bin")
+;;       (require 'setup-cygwin)
+;;       ;; better to set HOME env in GUI
+;;       ;; (setenv "HOME" "c:/cygwin/home/someuser")
+;;       )
+;;   (error
+;;    (message "setup-cygwin failed, continue anyway")
+;;    ))
 
 (require 'idle-require)
 
@@ -66,7 +66,6 @@
 ;; actually, I don't know which major-mode use flyspell.
 (require 'init-spelling)
 (require 'init-xterm)
-;(require 'init-osx-keys)
 (require 'init-gui-frames)
 (require 'init-ido)
 (require 'init-maxframe)
@@ -79,7 +78,7 @@
 (require 'multiple-cursors)
 (require 'init-recentf)
 (require 'init-smex)
-(if *emacs24* (require 'init-helm))
+(require 'init-helm)
 (require 'init-hippie-expand)
 (require 'init-windows)
 (require 'init-sessions)
@@ -88,46 +87,46 @@
 (require 'init-crontab)
 (require 'init-textile)
 (require 'init-markdown)
-;(require 'init-csv)
-;(require 'init-erlang)
-;(require 'init-javascript)
-(when *emacs24*
-  (require 'init-org)
-  (require 'init-org-mime))
-;(require 'init-css)
+(require 'init-javascript)
+(require 'init-org)
+(require 'init-org-mime)
+(require 'init-css)
 (require 'init-haml)
 (require 'init-python-mode)
+(require 'init-elisp)
+(require 'init-yasnippet)
 ;(require 'init-haskell)
 ;;(require 'init-ruby-mode)
-(require 'init-elisp)
-(if *emacs24* (require 'init-yasnippet))
+;(require 'init-csv)
+;(require 'init-erlang)
+
 ;; Use bookmark instead
 (require 'init-zencoding-mode)
 (require 'init-cc-mode)
 (require 'init-gud)
 (require 'init-cmake-mode)
-;;(require 'init-csharp-mode)
 (require 'init-linum-mode)
 (require 'init-which-func)
 (require 'init-move-window-buffer)
-;; (require 'init-gist)
 (require 'init-moz)
 (require 'init-gtags)
-;; use evil mode (vi key binding)
-;(require 'init-evil)
 (require 'init-sh)
 (require 'init-ctags)
 (require 'init-ace-jump-mode)
 (require 'init-bbdb)
 (require 'init-gnus)
-;;(require 'init-lua-mode)
 (require 'init-workgroups2)
 (require 'init-term-mode)
 (require 'init-web-mode)
 (require 'init-sr-speedbar)
 (require 'init-slime)
-(when *emacs24* (require 'init-company))
+(require 'init-company)
 (require 'init-stripe-buffer)
+;;(require 'init-csharp-mode)
+;;(require 'init-gist)
+;; use evil mode (vi key binding)
+;(require 'init-evil)
+;;(require 'init-lua-mode)
 ;(require 'init-eim) ;;  cannot be idle-required
 
 ;; color theme
@@ -135,7 +134,7 @@
 (require 'color-theme-molokai)
 (color-theme-molokai)
 ;; misc has some crucial tools I need immediately
-(require 'init-misc)
+;;(require 'init-misc)
 
 (setq idle-require-idle-delay 3)
 (setq idle-require-symbols '(init-lisp
@@ -143,7 +142,6 @@
                              init-elnode
                              init-doxygen
                              init-pomodoro
-                             init-emacspeak
                              init-artbollocks-mode
                              init-emacs-w3m
                              init-semantic))
@@ -162,7 +160,7 @@
 (require 'xcscope)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; If you edit it by hqand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(bmkp-last-as-first-bookmark-file "~/.emacs.bmk")
