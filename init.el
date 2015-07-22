@@ -125,7 +125,7 @@
 ;; misc has some crucial tools I need immediately
 ;;(require 'init-misc)
 
-(setq idle-require-idle-delay 3)
+(setq idle-require-idle-delay 2)
 (setq idle-require-symbols '(init-lisp
                              init-keyfreq
                              init-elnode
@@ -147,19 +147,11 @@
    )
 (require 'time-date t)
 (require 'xcscope)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hqand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(bmkp-last-as-first-bookmark-file "~/.emacs.bmk")
- '(safe-local-variable-values (quote ((emacs-lisp-docstring-fill-column . 75) (ruby-compilation-executable . "ruby") (ruby-compilation-executable . "ruby1.8") (ruby-compilation-executable . "ruby1.9") (ruby-compilation-executable . "rbx") (ruby-compilation-executable . "jruby")))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(window-numbering-face ((t (:foreground "DeepPink" :underline "DeepPink" :weight bold))) t))
+
+;;; set the customize file
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file)
+
 ;;; Local Variables:
 ;;; no-byte-compile: t
 ;;; End:
