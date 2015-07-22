@@ -92,9 +92,6 @@
 ;; Use bookmark instead
 (require 'init-zencoding-mode)
 (require 'init-cc-mode)
-(require 'init-gud)
-(require 'init-cmake-mode)
-(require 'init-linum-mode)
 (require 'init-which-func)
 (require 'init-move-window-buffer)
 (require 'init-moz)
@@ -117,6 +114,9 @@
 ;(require 'init-evil)
 ;;(require 'init-lua-mode)
 ;(require 'init-eim) ;;  cannot be idle-required
+;;(require 'init-gud) ;; I don't know what's this
+;;(require 'init-cmake-mode) ;; I don't need this now
+;;(require 'init-linum-mode) ;; This config is for emacs 23
 
 ;; color theme
 (require 'color-theme)
