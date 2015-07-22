@@ -37,36 +37,31 @@
 
      (define-key magit-status-mode-map (kbd "q") 'magit-quit-session)))
 
-(when *is-a-mac*
-  (add-hook 'magit-mode-hook (lambda () (local-unset-key [(meta h)]))))
-
 (eval-after-load 'magit
   '(progn
      (require 'magit-key-mode)
      ))
 
 ;; {{ git-gutter
-(when *emacs24*
-  (require 'git-gutter)
+(require 'git-gutter)
 
   ; If you enable global minor mode
-  (global-git-gutter-mode t)
+(global-git-gutter-mode t)
 
-  (git-gutter:linum-setup)
+(git-gutter:linum-setup)
 
-  (global-set-key (kbd "C-x C-g") 'git-gutter:toggle)
-  (global-set-key (kbd "C-x v =") 'git-gutter:popup-hunk)
+(global-set-key (kbd "C-x C-g") 'git-gutter:toggle)
+(global-set-key (kbd "C-x v =") 'git-gutter:popup-hunk)
 
-  ;; Jump to next/previous hunk
-  (global-set-key (kbd "C-x p") 'git-gutter:previous-hunk)
-  (global-set-key (kbd "C-x n") 'git-gutter:next-hunk)
+;; Jump to next/previous hunk
+(global-set-key (kbd "C-x p") 'git-gutter:previous-hunk)
+(global-set-key (kbd "C-x n") 'git-gutter:next-hunk)
 
-  ;; Stage current hunk
-  (global-set-key (kbd "C-x v s") 'git-gutter:stage-hunk)
+;; Stage current hunk
+(global-set-key (kbd "C-x v s") 'git-gutter:stage-hunk)
 
-  ;; Revert current hunk
-  (global-set-key (kbd "C-x v r") 'git-gutter:revert-hunk)
-  )
+;; Revert current hunk
+(global-set-key (kbd "C-x v r") 'git-gutter:revert-hunk)
 ;; }}
 
 ;;----------------------------------------------------------------------------

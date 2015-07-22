@@ -12,9 +12,6 @@
         "xelatex -interaction nonstopmode -output-directory %o %f"))
 ;; }}
 
-(if (and *is-a-mac* (file-exists-p "/Applications/LibreOffice.app/Contents/MacOS/soffice"))
-    (setq org-export-odt-convert-processes '(("LibreOffice" "/Applications/LibreOffice.app/Contents/MacOS/soffice --headless --convert-to %f%x --outdir %d %i"))))
-
 ;; @see https://gist.github.com/mwfogleman/95cc60c87a9323876c6c
 (defun narrow-or-widen-dwim ()
   "If the buffer is narrowed, it widens. Otherwise, it narrows to region, or Org subtree."

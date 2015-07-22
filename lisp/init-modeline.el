@@ -47,7 +47,7 @@
 
     " --"
     ;; i don't want to see minor-modes; but if you want, uncomment this:
-    ;; minor-mode-alist  ;; list of minor modes
+    minor-mode-alist  ;; list of minor modes
     "%-" ;; fill with '-'
     ))
 

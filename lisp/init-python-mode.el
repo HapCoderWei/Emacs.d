@@ -11,12 +11,9 @@
   '(require 'flymake-python-pyflakes))
 
 (add-hook 'python-mode-hook '(lambda ()
-                               (when *emacs24*
-                                 (anaconda-mode)
-                                 (add-to-list 'company-backends 'company-jedi)
-                                 (eldoc-mode))
+			       (anaconda-mode)
+			       (add-to-list 'company-backends 'company-jedi)
+			       (eldoc-mode)
                                (flymake-python-pyflakes-load)))
-
-
 
 (provide 'init-python-mode)

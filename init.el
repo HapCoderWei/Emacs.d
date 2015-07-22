@@ -42,21 +42,9 @@
 ;; Load configs for specific features and modes
 ;;----------------------------------------------------------------------------
 (require 'cl-lib)
-(require 'init-compat)
+;;(require 'init-compat)
 (require 'init-utils)
 (require 'init-site-lisp) ;; Must come before elpa, as it may provide package.el
-
-;; ;; win32 auto configuration, assuming that cygwin is installed at "c:/cygwin"
-;; (condition-case nil
-;;     (when *win32*
-;;       (setq cygwin-mount-cygwin-bin-directory "c:/cygwin/bin")
-;;       (require 'setup-cygwin)
-;;       ;; better to set HOME env in GUI
-;;       ;; (setenv "HOME" "c:/cygwin/home/someuser")
-;;       )
-;;   (error
-;;    (message "setup-cygwin failed, continue anyway")
-;;    ))
 
 (require 'idle-require)
 
@@ -70,7 +58,6 @@
 (require 'init-gui-frames)
 (require 'init-ido)
 (require 'init-maxframe)
-(require 'init-proxies)
 (require 'init-dired)
 (require 'init-isearch)
 (require 'init-uniquify)
@@ -85,17 +72,18 @@
 (require 'init-sessions)
 (require 'init-fonts)
 (require 'init-git)
-(require 'init-crontab)
-(require 'init-textile)
 (require 'init-markdown)
 (require 'init-javascript)
 (require 'init-org)
 (require 'init-org-mime)
 (require 'init-css)
-(require 'init-haml)
 (require 'init-python-mode)
 (require 'init-elisp)
 (require 'init-yasnippet)
+;;(require 'init-proxies) ;;FOR Mac OS X only
+;;(require 'init-crontab)
+;;(require 'init-textile)
+;;(require 'init-haml) ;; I don't know what's this
 ;(require 'init-haskell)
 ;;(require 'init-ruby-mode)
 ;(require 'init-csv)

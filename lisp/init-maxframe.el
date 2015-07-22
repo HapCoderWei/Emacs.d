@@ -3,21 +3,6 @@
 (autoload 'maximize-frame "maxframe" "" t)
 (autoload 'restore-frame "maxframe" "" t)
 
-(when *is-cocoa-emacs*
-  (eval-after-load 'maxframe
-    '(progn
-       (fset 'maximize-frame 'x-maximize-frame)
-       (fset 'restore-frame 'x-restore-frame))))
-
-(when *is-a-mac*
-  (setq mf-display-padding-width 4
-        mf-offset-x 0
-        mf-offset-y 0
-        mf-display-padding-height (if (when (boundp 'ns-auto-hide-menu-bar)
-                                        ns-auto-hide-menu-bar)
-                                      23
-                                    (+ 27 23))))
-
 (require 'init-utils) ; for with-selected-frame
 
 (defvar sanityinc/prev-frame nil "The selected frame before invoking `make-frame-command'.")

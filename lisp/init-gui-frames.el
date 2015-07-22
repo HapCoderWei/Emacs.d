@@ -3,7 +3,7 @@
 ;;----------------------------------------------------------------------------
 (defun maybe-suspend-frame ()
   (interactive)
-  (unless (and *is-a-mac* window-system)
+  (unless (window-system)
     (suspend-frame)))
 
 (global-set-key (kbd "C-z") 'maybe-suspend-frame)
@@ -47,7 +47,7 @@
 
 
   ;; Command-Option-f to toggle fullscreen mode
-  (global-set-key (kbd "M-ƒ") 'ns-toggle-fullscreen))
+(global-set-key (kbd "M-ƒ") 'ns-toggle-fullscreen))
 
 (global-set-key (kbd "M-C-8") '(lambda () (interactive) (adjust-opacity nil -5)))
 (global-set-key (kbd "M-C-9") '(lambda () (interactive) (adjust-opacity nil 5)))
