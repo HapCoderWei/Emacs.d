@@ -4,7 +4,7 @@
 ;; use setq-default to set it for /all/ modes
 (setq-default mode-line-format
   (list
-    ;; the buffer name; the file name as a tool tip
+   ;; the buffer name; the file name as a tool tip
     '(:eval (propertize "%b " 'face nil
         'help-echo (buffer-file-name)))
 
@@ -42,13 +42,16 @@
                              'help-echo "Buffer is read-only"))))
     "] "
 
+    '(:eval (list (nyan-create)))
     ;;global-mode-string, org-timer-set-timer in org-mode need this
     (propertize "%M" 'face nil)
 
     " --"
+
     ;; i don't want to see minor-modes; but if you want, uncomment this:
     minor-mode-alist  ;; list of minor modes
     "%-" ;; fill with '-'
+
     ))
 
 (provide 'init-modeline)

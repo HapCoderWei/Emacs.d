@@ -1,6 +1,7 @@
 ;; -*- coding: utf-8 -*-
 (setq emacs-load-start-time (current-time))
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/lisp"))
+
 (setq default-directory "~/")
 
 ;;----------------------------------------------------------------------------
@@ -58,7 +59,7 @@
 (require 'init-gui-frames)
 (require 'init-ido)
 (require 'init-maxframe)
-(require 'init-dired)
+;;(require 'init-dired)
 (require 'init-isearch)
 (require 'init-uniquify)
 (require 'init-ibuffer)
@@ -67,17 +68,17 @@
 (require 'init-recentf)
 (require 'init-smex)
 (require 'init-helm)
-(require 'init-hippie-expand)
+;;(require 'init-hippie-expand)
 (require 'init-windows)
-(require 'init-sessions)
+;;(require 'init-sessions)
 (require 'init-fonts)
-(require 'init-git)
-(require 'init-markdown)
-(require 'init-javascript)
-(require 'init-org)
-(require 'init-org-mime)
-(require 'init-css)
-(require 'init-python-mode)
+;;(require 'init-git)
+;;(require 'init-markdown)
+;;(require 'init-javascript)
+;;(require 'init-org)
+;;(require 'init-org-mime)
+;;(require 'init-css)
+;;(require 'init-python-mode)
 (require 'init-elisp)
 (require 'init-yasnippet)
 ;;(require 'init-proxies) ;;FOR Mac OS X only
@@ -90,24 +91,24 @@
 ;(require 'init-erlang)
 
 ;; Use bookmark instead
-(require 'init-zencoding-mode)
+;;(require 'init-zencoding-mode)
 (require 'init-cc-mode)
 (require 'init-which-func)
 (require 'init-move-window-buffer)
-(require 'init-moz)
+;;(require 'init-moz)
 (require 'init-gtags)
-(require 'init-sh)
+;;(require 'init-sh)
 (require 'init-ctags)
 (require 'init-ace-jump-mode)
 (require 'init-bbdb)
 (require 'init-gnus)
-(require 'init-workgroups2)
-(require 'init-term-mode)
-(require 'init-web-mode)
-(require 'init-sr-speedbar)
+;;(require 'init-term-mode)
+;;(require 'init-web-mode)
+;;(require 'init-sr-speedbar)
 (require 'init-slime)
-(require 'init-company)
-(require 'init-stripe-buffer)
+;;(require 'init-company)
+;;(require 'init-stripe-buffer)
+;;(require 'init-workgroups2)
 ;;(require 'init-csharp-mode)
 ;;(require 'init-gist)
 ;; use evil mode (vi key binding)
@@ -116,14 +117,13 @@
 ;(require 'init-eim) ;;  cannot be idle-required
 ;;(require 'init-gud) ;; I don't know what's this
 ;;(require 'init-cmake-mode) ;; I don't need this now
-;;(require 'init-linum-mode) ;; This config is for emacs 23
 
 ;; color theme
 (require 'color-theme)
 (require 'color-theme-molokai)
 (color-theme-molokai)
 ;; misc has some crucial tools I need immediately
-;;(require 'init-misc)
+(require 'init-misc)
 
 (setq idle-require-idle-delay 2)
 (setq idle-require-symbols '(init-lisp
@@ -132,8 +132,7 @@
                              init-doxygen
                              init-pomodoro
                              init-artbollocks-mode
-                             init-emacs-w3m
-                             init-semantic))
+                             init-emacs-w3m))
 (idle-require-mode 1) ;; starts loading
 
 ;;----------------------------------------------------------------------------

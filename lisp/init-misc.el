@@ -79,21 +79,21 @@
 ;;----------------------------------------------------------------------------
 (move-text-default-bindings)
 
-(defun suspend-mode-during-cua-rect-selection (mode-name)
-  "Add an advice to suspend `MODE-NAME' while selecting a CUA rectangle."
-  (let ((flagvar (intern (format "%s-was-active-before-cua-rectangle" mode-name)))
-        (advice-name (intern (format "suspend-%s" mode-name))))
-    (eval-after-load 'cua-rect
-      `(progn
-         (defvar ,flagvar nil)
-         (make-variable-buffer-local ',flagvar)
-         (defadvice cua--activate-rectangle (after ,advice-name activate)
-           (setq ,flagvar (and (boundp ',mode-name) ,mode-name))
-           (when ,flagvar
-             (,mode-name 0)))
-         (defadvice cua--deactivate-rectangle (after ,advice-name activate)
-           (when ,flagvar
-             (,mode-name 1)))))))
+;; (defun suspend-mode-during-cua-rect-selection (mode-name)
+;;   "Add an advice to suspend `MODE-NAME' while selecting a CUA rectangle."
+;;   (let ((flagvar (intern (format "%s-was-active-before-cua-rectangle" mode-name)))
+;;         (advice-name (intern (format "suspend-%s" mode-name))))
+;;     (eval-after-load 'cua-rect
+;;       `(progn
+;;          (defvar ,flagvar nil)
+;;          (make-variable-buffer-local ',flagvar)
+;;          (defadvice cua--activate-rectangle (after ,advice-name activate)
+;;            (setq ,flagvar (and (boundp ',mode-name) ,mode-name))
+;;            (when ,flagvar
+;;              (,mode-name 0)))
+;;          (defadvice cua--deactivate-rectangle (after ,advice-name activate)
+;;            (when ,flagvar
+;;              (,mode-name 1)))))))
 
 (eval-after-load 'grep
   '(progn
@@ -128,14 +128,14 @@
                    (lambda (s1 s2) (eq (random 2) 0)))))))
 
 ;need install browse-kill-ring
-(if *emacs24* (browse-kill-ring-default-keybindings))
+;;(if *emacs24* (browse-kill-ring-default-keybindings))
 
 (add-hook 'prog-mode-hook
           '(lambda ()
              ;; enable for all programming modes
              ;; http://emacsredux.com/blog/2013/04/21/camelcase-aware-editing/
              (subword-mode)
-             (if *emacs24* (electric-pair-mode 1))
+             (electric-pair-mode 1)
              ;; eldoc, show API doc in minibuffer echo area
              (turn-on-eldoc-mode)
              ;; show trailing spaces in a programming mod
@@ -232,23 +232,23 @@
 (global-set-key [f12] 'list-bookmarks)
 (global-set-key (kbd "M-o") 'switch-window)
 
-(when *win32*
-  ;; resize frame
-  (defun w32-maximize-frame ()
-    "Maximize the current frame."
-    (interactive)
-    (w32-send-sys-command 61488)
-    (global-set-key (kbd "C-c z") 'w32-restore-frame))
+;; (when *win32*
+;;   ;; resize frame
+;;   (defun w32-maximize-frame ()
+;;     "Maximize the current frame."
+;;     (interactive)
+;;     (w32-send-sys-command 61488)
+;;     (global-set-key (kbd "C-c z") 'w32-restore-frame))
 
-  (global-set-key (kbd "C-c z") 'w32-maximize-frame)
+;;   (global-set-key (kbd "C-c z") 'w32-maximize-frame)
 
-  (defun w32-restore-frame ()
-    "Restore a minimized frame."
-    (interactive)
-    (w32-send-sys-command 61728)
-    (global-set-key (kbd "C-c z") 'w32-maximize-frame))
+;;   (defun w32-restore-frame ()
+;;     "Restore a minimized frame."
+;;     (interactive)
+;;     (w32-send-sys-command 61728)
+;;     (global-set-key (kbd "C-c z") 'w32-maximize-frame))
 
-  )
+;;   )
 
 ;; M-x ct ENTER
 (defun ct (dir-name)
@@ -429,10 +429,7 @@
          ((and (display-graphic-p) x-select-enable-clipboard)
           (x-set-selection 'CLIPBOARD (buffer-substring (region-beginning) (region-end))))
          (t (shell-command-on-region (region-beginning) (region-end)
-                                     (cond
-                                      (*cygwin* "putclip")
-                                      (*is-a-mac* "pbcopy")
-                                      (*linux* "xsel -ib")))
+                                     (cond (*linux* "xsel -ib")))
             ))
         (message "Yanked region to clipboard!")
         (deactivate-mark))
@@ -445,8 +442,6 @@
     (insert (x-selection 'CLIPBOARD)))
    (t (shell-command
        (cond
-        (*cygwin* "getclip")
-        (*is-a-mac* "pbpaste")
         (t "xsel -ob"))
        1))
    ))
@@ -519,7 +514,7 @@
 (defun toggle-env-http-proxy ()
   "set/unset the environment variable http_proxy which w3m uses"
   (interactive)
-  (let ((proxy "http://127.0.0.1:8000"))
+  (let ((proxy "http://127.0.0.1:10800"))
     (if (string= (getenv "http_proxy") proxy)
         ;; clear the the proxy
         (progn
@@ -676,14 +671,14 @@ buffer is not visiting a file."
 (global-set-key (kbd "C-c e") 'fc-eval-and-replace)
 
 (defun calc-eval-and-insert (&optional start end)
-(interactive "r")
-(let ((result (calc-eval (buffer-substring-no-properties start end))))
-(goto-char (point-at-eol))
-(insert " = " result)))
+  (interactive "r")
+  (let ((result (calc-eval (buffer-substring-no-properties start end))))
+    (goto-char (point-at-eol))
+    (insert " = " result)))
 
 (defun calc-eval-line-and-insert ()
-(interactive)
-(calc-eval-and-insert (point-at-bol) (point-at-eol)))
+  (interactive)
+  (calc-eval-and-insert (point-at-bol) (point-at-eol)))
 (global-set-key (kbd "C-c C-e") 'calc-eval-line-and-insert)
 ;; }}
 
@@ -892,12 +887,12 @@ The full path into relative path insert it as a local file link in org-mode"
 ;; # Langdao Chinese => English
 ;; curl http://abloz.com/huzheng/stardict-dic/zh_CN/stardict-langdao-ec-gb-2.4.2.tar.bz2 | tar jx -C ~/.stardict/dic
 ;;
-(setq sdcv-dictionary-simple-list '("朗道英汉字典5.0"))
-(setq sdcv-dictionary-complete-list '("WordNet"))
-(autoload 'sdcv-search-pointer "sdcv" "show word explanation in buffer" t)
-(autoload 'sdcv-search-input+ "sdcv" "show word explanation in tooltip" t)
-(global-set-key (kbd "C-c ; b") 'sdcv-search-pointer)
-(global-set-key (kbd "C-c ; t") 'sdcv-search-input+)
+;;(setq sdcv-dictionary-simple-list '("朗道英汉字典5.0"))
+;;(setq sdcv-dictionary-complete-list '("WordNet"))
+;; (autoload 'sdcv-search-pointer "sdcv" "show word explanation in buffer" t)
+;; (autoload 'sdcv-search-input+ "sdcv" "show word explanation in tooltip" t)
+;; (global-set-key (kbd "C-c ; b") 'sdcv-search-pointer)
+;; (global-set-key (kbd "C-c ; t") 'sdcv-search-input+)
 ;; }}
 
 ;; {{smart-compile: http://www.emacswiki.org/emacs/SmartCompile
@@ -913,7 +908,7 @@ The full path into relative path insert it as a local file link in org-mode"
 (autoload 'wxhelp-browse-class-or-api "wxwidgets-help" "" t)
 (autoload 'issue-tracker-increment-issue-id-under-cursor "issue-tracker" "" t)
 (autoload 'elpamr-create-mirror-for-installed "elpa-mirror" "" t)
-(autoload 'org2nikola-export-subtree "org2nikola" "" t)
+;;(autoload 'org2nikola-export-subtree "org2nikola" "" t)
 ;; }}
 
 (setq web-mode-imenu-regexp-list
@@ -987,7 +982,7 @@ The full path into relative path insert it as a local file link in org-mode"
     (setenv "GPG_AGENT_INFO" agent)))
 
 ;; {{go-mode
-(require 'go-mode-load)
+;;(require 'go-mode-load)
 ;; }}
 
 (provide 'init-misc)
